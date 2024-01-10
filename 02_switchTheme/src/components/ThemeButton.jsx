@@ -11,7 +11,7 @@ export default function ThemeBtn() {
             lightTheme();
         }
     }
-
+    //remember to change tailwind config file
     return (
         <label className="relative inline-flex items-center cursor-pointer">
             <input
