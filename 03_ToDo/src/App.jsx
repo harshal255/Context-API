@@ -43,7 +43,7 @@ export default function App() {
             <TodoForm></TodoForm>
           </div>
           <div className="flex flex-wrap gap-y-3">
-            {todos.map((ele) => <TodoItem key={ele.id} todo={ele} className="w-full"></TodoItem>)}
+            {todos.map((ele, index) => <TodoItem key={index} todo={ele} className="w-full"></TodoItem>)}
           </div>
         </div>
       </div>
