@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { useToDo } from "../context";
+import { useToDo, useNotificaton } from "../context";
 
 
 
@@ -8,6 +8,7 @@ function TodoItem({ todo }) {
     const [isTodoEditable, setIsTodoEditable] = useState(false);
     const [todoMsg, setTodoMsg] = useState(todo.todo);
     const { updateToDo, deleteToDo, toggleComplete } = useToDo();
+    const { setNotification } = useNotificaton();
 
     const editTodo = () => {
         updateToDo(todo.id, { ...todo, todo: todoMsg });
@@ -15,7 +16,14 @@ function TodoItem({ todo }) {
     }
 
     const toggleCompleted = () => {
+        console.log(todo);
         toggleComplete(todo.id);
+        console.log(todo);
+        if (todo.completed) {
+            setNotification("Unarchived Todo", "unarchived")
+            return;
+        }
+        setNotification("Archived", "archived");
     }
 
     useEffect(() => {
