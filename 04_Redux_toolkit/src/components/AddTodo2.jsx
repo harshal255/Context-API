@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
 
-const AddTodo = () => {
+const AddTodo2 = () => {
     const [input, setInput] = useState("");
     const dispatch = useDispatch();
 
@@ -12,9 +12,9 @@ const AddTodo = () => {
         setInput("");
     }
 
-    
 
-    
+
+
     return (
         <form className="flex" onSubmit={(e) => addTodoHandler(e)}>
             <input
@@ -25,10 +25,10 @@ const AddTodo = () => {
                 onChange={(e) => setInput(e.target.value)}
             />
             <button type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
-                Add 1
+                Add 2
             </button>
         </form>
     )
 }
 
-export default AddTodo
+export default AddTodo2

@@ -3,6 +3,7 @@
 import { useDispatch } from "react-redux"
 import { removeTodo, updateTodo, toggleComplete } from "../features/todo/todoSlice"
 import { useState } from "react";
+import { useEffect } from "react";
 
 const TodoItem = ({ todo }) => {
     const { id, text, completed } = todo;
@@ -11,6 +12,14 @@ const TodoItem = ({ todo }) => {
     const [todoMsg, setTodoMsg] = useState(text);
     const [isTodoEditable, setIsTodoEditable] = useState(false);
 
+    const updatetodo = () => {
+        dispatch(updateTodo({ id: id, text: todoMsg }));
+        setIsTodoEditable(false);
+    }
+
+    useEffect(() => {
+        setTodoMsg(text);
+    }, [text])
 
     return (
         <div
@@ -38,8 +47,7 @@ const TodoItem = ({ todo }) => {
                     if (completed) return;
 
                     if (isTodoEditable) {
-                        dispatch(updateTodo({ id: id, text: todoMsg }));
-                        setIsTodoEditable(false);
+                        updatetodo();
                     } else setIsTodoEditable((prev) => !prev);
                 }}
                 disabled={completed}

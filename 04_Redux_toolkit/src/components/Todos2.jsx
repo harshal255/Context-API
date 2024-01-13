@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import TodoItem from "./TodoItem";
 
 
-const Todos = () => {
+const Todos2 = () => {
     //use selector for getting data from the store
     const todos = useSelector(state => state.todos);
 
@@ -14,4 +14,4 @@ const Todos = () => {
     )
 }
 
-export default Todos
+export default Todos2

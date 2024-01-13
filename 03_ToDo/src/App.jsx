@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { ToDoProvider } from "./context";
-import { TodoForm, TodoItem } from "./components";
+import { TodoForm, TodoItem, TodoForm2 } from "./components";
 
 export default function App() {
 
@@ -20,7 +20,9 @@ export default function App() {
 
   const updateToDo = (id, todo) => {
     setTodos([...todos.map((ele) => ele.id === id ? todo : ele)]);
+
   }
+
 
   //while first time load web app
   useEffect(() => {
@@ -41,6 +43,16 @@ export default function App() {
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
           <div className="mb-4">
             <TodoForm></TodoForm>
+          </div>
+          <div className="flex flex-wrap gap-y-3">
+            {todos.map((ele, index) => <TodoItem key={index} todo={ele} className="w-full"></TodoItem>)}
+          </div>
+        </div>
+        <hr className="h-[5rem]" />
+        <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
+          <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos 2</h1>
+          <div className="mb-4">
+            <TodoForm2></TodoForm2>
           </div>
           <div className="flex flex-wrap gap-y-3">
             {todos.map((ele, index) => <TodoItem key={index} todo={ele} className="w-full"></TodoItem>)}

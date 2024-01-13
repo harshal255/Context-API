@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToDo } from "../context";
 
 
@@ -17,6 +17,10 @@ function TodoItem({ todo }) {
     const toggleCompleted = () => {
         toggleComplete(todo.id);
     }
+
+    useEffect(() => {
+        setTodoMsg(todo.todo); // Update local state when todo prop changes
+    }, [todo.todo]);
 
 
     return (
