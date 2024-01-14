@@ -32,6 +32,7 @@ export const notificationSlice = createSlice({
                 }
             }
             state.notifications.push(notification);
+            console.log("set notification", notification);
         },
         removeNotification: (state, action) => {
             state.notifications = state.notifications.filter(

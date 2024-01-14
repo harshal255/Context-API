@@ -2,8 +2,10 @@
 
 import { useDispatch } from "react-redux"
 import { removeTodo, updateTodo, toggleComplete } from "../features/todo/todoSlice"
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { setNotification } from "../features/notification/notificationSlice";
+
+
 
 const TodoItem = ({ todo }) => {
     const { id, text, completed } = todo;
@@ -14,7 +16,42 @@ const TodoItem = ({ todo }) => {
 
     const updatetodo = () => {
         dispatch(updateTodo({ id: id, text: todoMsg }));
+        dispatch(setNotification({
+            text: "Todo Updated", typed: {
+                added: false,
+                removed: false,
+                edited: true,
+                archived: false,
+                unarchived: false,
+            }
+        }));
         setIsTodoEditable(false);
+    }
+
+    const completedtodo = () => {
+        dispatch(toggleComplete(id));
+        dispatch(setNotification({
+            text: completed ? "Todo Unarchived" : "Todo Archived", typed: {
+                added: false,
+                removed: false,
+                edited: false,
+                archived: completed ? false : true,
+                unarchived: completed ? true : false,
+            }
+        }));
+    }
+
+    const deletetodo = () => {
+        dispatch(removeTodo(id));
+        dispatch(setNotification({
+            text: "Todo Deleted", typed: {
+                added: false,
+                removed: true,
+                edited: false,
+                archived: false,
+                unarchived: false,
+            }
+        }));
     }
 
     useEffect(() => {
@@ -30,7 +67,7 @@ const TodoItem = ({ todo }) => {
                 type="checkbox"
                 className="cursor-pointer"
                 checked={completed}
-                onChange={() => dispatch(toggleComplete(id))}
+                onChange={() => completedtodo()}
             />
             <input
                 type="text"
@@ -57,7 +94,7 @@ const TodoItem = ({ todo }) => {
             {/* Delete Todo Button */}
             <button
                 className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0"
-                onClick={() => dispatch(removeTodo(id))}
+                onClick={() => deletetodo()}
             >
                 ❌
             </button>

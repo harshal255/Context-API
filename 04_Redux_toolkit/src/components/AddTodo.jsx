@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
+import { setNotification } from "../features/notification/notificationSlice";
 
 const AddTodo = () => {
     const [input, setInput] = useState("");
@@ -9,12 +10,21 @@ const AddTodo = () => {
     const addTodoHandler = (e) => {
         e.preventDefault();
         dispatch(addTodo(input));
+        dispatch(setNotification({
+            text: "Todo Added", typed: {
+                added: true,
+                removed: false,
+                edited: false,
+                archived: false,
+                unarchived: false,
+            }
+        }));
         setInput("");
     }
 
-    
 
-    
+
+
     return (
         <form className="flex" onSubmit={(e) => addTodoHandler(e)}>
             <input
