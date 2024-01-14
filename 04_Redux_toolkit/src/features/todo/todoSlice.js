@@ -6,11 +6,15 @@ const initialState = {
     todos: JSON.parse(localStorage.getItem("todos")) ? JSON.parse(localStorage.getItem("todos")) : [{ id: 1, text: "Hello World", completed: false }],
 }
 
+
 export const todoSlice = createSlice({
+
+    
     name: "todo",
     initialState,
     reducers: {
         addTodo: (state, action) => {
+           
             const todo = {
                 id: nanoid(),
                 text: action.payload,
@@ -18,6 +22,7 @@ export const todoSlice = createSlice({
             }
             state.todos.push(todo);
             localStorage.setItem("todos", JSON.stringify(state.todos))
+
         },
         removeTodo: (state, action) => {
             // console.log("remove todolist")

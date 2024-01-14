@@ -4,7 +4,7 @@ import TodoItem from "./TodoItem";
 
 const Todos = () => {
     //use selector for getting data from the store
-    const todos = useSelector(state => state.todos);
+    const todos = useSelector(state => state.todo.todos);
 
 
     return (
